@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Tickets - CineBook</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Flatpickr CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    <!-- Flatpickr JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="brand-icon">🎬</span>
+                <span class="brand-text">CineBook</span>
+            </div>
+        </div>
+    </nav>
+
+
+
+     <!-- Toast / Modal (same as index)  ✅ BODY ke andar -->
+  <div id="ticketModal" class="modal" style="display:none">
+    <div class="modal-content">
+      <button id="modalClose" class="modal-close" aria-label="Close">×</button>
+      <div id="ticketModalBody"></div>
+    </div>
+  </div>
+
+    <!-- Booking Page -->
+    <main class="booking-page">
+        <div class="container">
+
+            <!-- Movie details (populated by JS) -->
+            <div class="movie-info" id="movieInfo"></div>
+
+            <!-- Book Tickets & Back Button -->
+            <div class="movie-actions">
+                <button class="back-btn" onclick="window.location.href='index.html'">
+                    ⬅ Back to Movies
+                </button>
+                <button id="bookTicketsBtn" class="book-btn">Book Tickets</button>
+            </div>
+
+            <!-- Theatres / Booking Steps (hidden by default) -->
+            <div id="bookingPage" style="display:none;">
+
+                <!-- Booking Steps -->
+                <div class="booking-steps">
+                    <div class="step active" data-step="1">
+                        <span class="step-number">1</span>
+                        <span class="step-text">Select Theater & Show</span>
+                    </div>
+                    <div class="step" data-step="2">
+                        <span class="step-number">2</span>
+                        <span class="step-text">Choose Seats</span>
+                    </div>
+                    <div class="step" data-step="3">
+                        <span class="step-number">3</span>
+                        <span class="step-text">Add Snacks</span>
+                    </div>
+                    <div class="step" data-step="4">
+                        <span class="step-number">4</span>
+                        <span class="step-text">Payment</span>
+                    </div>
+                </div>
+
+
+                <!-- Step 1 -->
+                <div class="booking-step step-1 active" id="step1">
+                    <h3>“Where & When? It’s Your Choice”</h3>
+                    <div class="theater-selection">
+
+                        <!-- Theater 1 -->
+                        <div class="theater-option" data-theater="downtown"
+                            style="background-image:url('Booking.Html_Page_Images/Theaters/CineBook\ IMAX\ Downtown.jpg');">
+                            <h4>CineBook IMAX Downtown</h4>
+                            <p>123 Cinema Boulevard, Downtown</p>
+
+                            <!-- Date & Time -->
+                            <div class="theater-schedule" style="display:none; margin-top:15px;">
+                                <h4>Select Date</h4>
+                                <input type="text" class="date-picker" placeholder="Pick a date">
+
+                                <h4 style="margin-top:10px;">Select Showtime</h4>
+                                <div class="showtimes">
+                                    <button class="showtime-btn" data-time="10:00 AM">10:00 AM</button>
+                                    <button class="showtime-btn" data-time="1:30 PM">1:30 PM</button>
+                                    <button class="showtime-btn" data-time="4:45 PM">4:45 PM</button>
+                                    <button class="showtime-btn" data-time="8:00 PM">8:00 PM</button>
+                                    <button class="showtime-btn" data-time="10:30 PM">10:30 PM</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Theater 2 -->
+                        <div class="theater-option" data-theater="mall"
+                            style="background-image:url('Booking.Html_Page_Images/Theaters/CineBook\ 4DX\ Mall.jpg');">
+                            <h4>CineBook 4DX Mall</h4>
+                            <p>456 Shopping Center, Mall District</p>
+
+                            <div class="theater-schedule" style="display:none; margin-top:15px;">
+                                <h4>Select Date</h4>
+                                <input type="text" class="date-picker" placeholder="Pick a date">
+
+                                <h4 style="margin-top:10px;">Select Showtime</h4>
+                                <div class="showtimes">
+                                    <button class="showtime-btn" data-time="11:00 AM">11:00 AM</button>
+                                    <button class="showtime-btn" data-time="2:15 PM">2:15 PM</button>
+                                    <button class="showtime-btn" data-time="5:30 PM">5:30 PM</button>
+                                    <button class="showtime-btn" data-time="9:00 PM">9:00 PM</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Theater 3 -->
+                        <div class="theater-option" data-theater="luxury"
+                            style="background-image:url('Booking.Html_Page_Images/Theaters/CineBook\ Luxury\ Central.jpg');">
+                            <h4>CineBook Luxury Central</h4>
+                            <p>789 Premium Plaza, Central District</p>
+
+                            <div class="theater-schedule" style="display:none; margin-top:15px;">
+                                <h4>Select Date</h4>
+                                <input type="text" class="date-picker" placeholder="Pick a date">
+
+                                <h4 style="margin-top:10px;">Select Showtime</h4>
+                                <div class="showtimes">
+                                    <button class="showtime-btn" data-time="11:00 AM">11:00 AM</button>
+                                    <button class="showtime-btn" data-time="3:30 PM">3:30 PM</button>
+                                    <button class="showtime-btn" data-time="7:00 PM">7:00 PM</button>
+                                    <button class="showtime-btn" data-time="10:00 PM">10:00 PM</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <button class="next-step-btn" id="nextToSeats" disabled>Select Seats</button>
+                    <button id="cancelBtn" class="cancel-btn">CANCEL</button>
+                </div>
+
+                <!-- Step 2: Seat Selection -->
+                <div class="booking-step step-2" id="step2">
+                    <h3>Choose Your Seats</h3>
+                    <div class="seat-selection">
+                        <div class="screen">
+                            <div class="screen-text">SCREEN</div>
+                        </div>
+                        <div class="seating-chart" id="seatingChart">
+                            <!-- Seats will be generated by JavaScript -->
+                        </div>
+                        <div class="seat-legend">
+                            <div class="legend-row">
+                                <div class="legend-item">
+                                    <div class="seat-demo vip"></div>
+                                    <span>VIP — $24.99</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="seat-demo premium"></div>
+                                    <span>Premium — $19.99</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="seat-demo regular"></div>
+                                    <span>Regular — $15.99</span>
+                                </div>
+                            </div>
+
+                            <div class="legend-row" style="margin-top:8px; ">
+                                <div class="legend-item">
+                                    <div class="seat-demo selected"></div>
+                                    <span>Selected</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="seat-demo occupied"></div>
+                                    <span>Occupied</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="selected-seats-info">
+                            <p>Selected Seats: <span id="selectedSeatsText">None</span></p>
+                            <p>Total Amount: $<span id="totalAmount">0.00</span></p>
+                        </div>
+                    </div>
+                    <div class="step-buttons">
+                        <button class="prev-step-btn" id="backToShowtime">Back</button>
+                        <button class="next-step-btn" id="nextToSnacks">Proceed to Snacks</button>
+
+                    </div>
+                </div>
+
+
+                <!-- STEP 3: Add Snacks & Beverages (REPLACE entire old step-3 with this) -->
+                <div class="booking-step step-3" id="step3" style="display:none;">
+                    <h3>Add Snacks & Beverages</h3>
+
+                    <!-- SNACKS GRID (all cards use same consistent structure) -->
+                    <div class="snacks-grid">
+
+                        <!-- Popcorn -->
+                        <div class="snack-card">
+                            <img src="Booking.Html_Page_Images/Add Snacks/Popcorn (Large).jpg" alt="Popcorn">
+                            <h4>Popcorn (Large)</h4>
+                            <p class="price">$8</p>
+                            <p class="desc">Crispy butter popcorn served fresh & hot.</p>
+                            <div class="snack-controls">
+                                <button class="snack-plus" data-name="Popcorn (Large)" data-price="8"
+                                    aria-label="Add Popcorn">+</button>
+                                <button class="snack-minus" data-name="Popcorn (Large)"
+                                    aria-label="Remove Popcorn">-</button>
+                            </div>
+                        </div>
+
+                        <!-- Coca Cola -->
+                        <div class="snack-card">
+                            <img src="Booking.Html_Page_Images/Add Snacks/Coca Cola (Large).webp" alt="Coca Cola">
+                            <h4>Coca Cola (Large)</h4>
+                            <p class="price">$5</p>
+                            <p class="desc">Chilled fizzy drink to refresh you.</p>
+                            <div class="snack-controls">
+                                <button class="snack-plus" data-name="Coca Cola (Large)" data-price="5"
+                                    aria-label="Add Coca Cola">+</button>
+                                <button class="snack-minus" data-name="Coca Cola (Large)"
+                                    aria-label="Remove Coca Cola">-</button>
+                            </div>
+                        </div>
+
+                        <!-- Nachos -->
+                        <div class="snack-card">
+                            <img src="Booking.Html_Page_Images/Add Snacks/Nachos with Cheese.jpg" alt="Nachos with Cheese">
+                            <h4>Nachos with Cheese</h4>
+                            <p class="price">$7</p>
+                            <p class="desc">Nachos loaded with hot melted cheese.</p>
+                            <div class="snack-controls">
+                                <button class="snack-plus" data-name="Nachos with Cheese" data-price="7"
+                                    aria-label="Add Nachos">+</button>
+                                <button class="snack-minus" data-name="Nachos with Cheese"
+                                    aria-label="Remove Nachos">-</button>
+                            </div>
+                        </div>
+
+                        <!-- Cheese Burger -->
+                        <div class="snack-card">
+                            <img src="Booking.Html_Page_Images/Add Snacks/Cheese Burger.jpg" alt="Cheese Burger">
+                            <h4>Cheese Burger</h4>
+                            <p class="price">$10</p>
+                            <p class="desc">Juicy grilled burger with melted cheese.</p>
+                            <div class="snack-controls">
+                                <button class="snack-plus" data-name="Cheese Burger" data-price="10"
+                                    aria-label="Add Cheese Burger">+</button>
+                                <button class="snack-minus" data-name="Cheese Burger"
+                                    aria-label="Remove Cheese Burger">-</button>
+                            </div>
+                        </div>
+
+                        <!-- French Fries -->
+                        <div class="snack-card">
+                            <img src="Booking.Html_Page_Images/Add Snacks/French Fries.jpg" alt="French Fries">
+                            <h4>French Fries</h4>
+                            <p class="price">$5</p>
+                            <p class="desc">Golden crispy fries with a sprinkle of salt.</p>
+                            <div class="snack-controls">
+                                <button class="snack-plus" data-name="French Fries" data-price="5"
+                                    aria-label="Add French Fries">+</button>
+                                <button class="snack-minus" data-name="French Fries"
+                                    aria-label="Remove French Fries">-</button>
+                            </div>
+                        </div>
+
+                        <!-- Pizza -->
+                        <div class="snack-card">
+                            <img src="Booking.Html_Page_Images/Add Snacks/Pizza.jpg" alt="Pizza">
+                            <h4>Pizza</h4>
+                            <p class="price">$6</p>
+                            <p class="desc">Hot cheesy Pizza with toppings of your choice.</p>
+                            <div class="snack-controls">
+                                <button class="snack-plus" data-name="Pizza" data-price="6"
+                                    aria-label="Add Pizza">+</button>
+                                <button class="snack-minus" data-name="Pizza" aria-label="Remove Pizza">-</button>
+                            </div>
+                        </div>
+
+                        <!-- Club Sandwich -->
+                        <div class="snack-card">
+                            <img src="Booking.Html_Page_Images/Add Snacks/Club Sandwich.webp" alt="Club Sandwich">
+                            <h4>Club Sandwich</h4>
+                            <p class="price">$8</p>
+                            <p class="desc">Fresh sandwich stacked with veggies & cheese.</p>
+                            <div class="snack-controls">
+                                <button class="snack-plus" data-name="Club Sandwich" data-price="8"
+                                    aria-label="Add Club Sandwich">+</button>
+                                <button class="snack-minus" data-name="Club Sandwich"
+                                    aria-label="Remove Club Sandwich">-</button>
+                            </div>
+                        </div>
+
+                        <!-- Chocolate Ice Cream -->
+                        <div class="snack-card">
+                            <img src="Booking.Html_Page_Images/Add Snacks/Chocolate Ice Cream.png" alt="Chocolate Ice Cream">
+                            <h4>Chocolate Ice Cream</h4>
+                            <p class="price">$4</p>
+                            <p class="desc">Delicious scoop of creamy chocolate ice cream.</p>
+                            <div class="snack-controls">
+                                <button class="snack-plus" data-name="Chocolate Ice Cream" data-price="4"
+                                    aria-label="Add Ice Cream">+</button>
+                                <button class="snack-minus" data-name="Chocolate Ice Cream"
+                                    aria-label="Remove Ice Cream">-</button>
+                            </div>
+                        </div>
+
+                        <!-- Sprite -->
+                        <div class="snack-card">
+                            <img src="Booking.Html_Page_Images/Add Snacks/Sprite (500ml).webp" alt="Sprite">
+                            <h4>Sprite (500ml)</h4>
+                            <p class="price">$5</p>
+                            <p class="desc">Refreshing lemon-flavored soda drink.</p>
+                            <div class="snack-controls">
+                                <button class="snack-plus" data-name="Sprite (500ml)" data-price="5"
+                                    aria-label="Add Sprite">+</button>
+                                <button class="snack-minus" data-name="Sprite (500ml)"
+                                    aria-label="Remove Sprite">-</button>
+                            </div>
+                        </div>
+
+                        <!-- Fanta -->
+                        <div class="snack-card">
+                            <img src="Booking.Html_Page_Images/Add Snacks/Fanta (500ml).jpeg" alt="Fanta">
+                            <h4>Fanta (500ml)</h4>
+                            <p class="price">$5</p>
+                            <p class="desc">Tangy orange-flavored sparkling drink.</p>
+                            <div class="snack-controls">
+                                <button class="snack-plus" data-name="Fanta (500ml)" data-price="5"
+                                    aria-label="Add Fanta">+</button>
+                                <button class="snack-minus" data-name="Fanta (500ml)"
+                                    aria-label="Remove Fanta">-</button>
+                            </div>
+                        </div>
+
+                        <!-- Limca -->
+                        <div class="snack-card">
+                            <img src="Booking.Html_Page_Images/Add Snacks/Limca (500ml).webp" alt="Limca">
+                            <h4>Limca (500ml)</h4>
+                            <p class="price">$5</p>
+                            <p class="desc">Refreshing lemon-lime drink to quench your thirst.</p>
+                            <div class="snack-controls">
+                                <button class="snack-plus" data-name="Limca (500ml)" data-price="5"
+                                    aria-label="Add Limca">+</button>
+                                <button class="snack-minus" data-name="Limca (500ml)"
+                                    aria-label="Remove Limca">-</button>
+                            </div>
+                        </div>
+
+                        <!-- Maaza (important: previously missing controls) -->
+                        <div class="snack-card">
+                            <img src="Booking.Html_Page_Images/Add Snacks/Maaza (500ml).jpg" alt="Maaza">
+                            <h4>Maaza (500ml)</h4>
+                            <p class="price">$5</p>
+                            <p class="desc">Delicious mango drink with a rich fruity taste.</p>
+                            <div class="snack-controls">
+                                <button class="snack-plus" data-name="Maaza (500ml)" data-price="5"
+                                    aria-label="Add Maaza">+</button>
+                                <button class="snack-minus" data-name="Maaza (500ml)"
+                                    aria-label="Remove Maaza">-</button>
+                            </div>
+                        </div>
+
+                    </div> <!-- end snacks-grid -->
+
+                    <!-- Summary + Buttons MUST be OUTSIDE the grid so layout doesn't break -->
+                    <div class="selected-snacks-info">
+                        <div class="snack-summary1">
+                            <p>Snacks Selected: <span id="selectedSnacksText">None</span></p>
+                            <p>Snacks Total: $<span id="snacksTotal">0</span></p>
+                        </div>
+                    </div>
+
+                    <div class="step-buttons">
+                        <button class="prev-step-btn" id="backToSeatsFromSnacks">Back</button>
+                        <button class="next-step-btn" id="nextToPaymentSnacks">Proceed to Payment</button>
+                    </div>
+                </div>
+                <!-- END STEP 3 -->
+
+
+
+                <!-- Step 4: Payment -->
+                <div class="booking-step step-4" id="step4" style="display:none;">
+                    <h3>Payment Details</h3>
+                    <div class="payment-container">
+                        <!-- Booking Summary (replace existing one) -->
+                        <div class="booking-summary">
+                            <h4>Booking Summary</h4>
+
+                            <div class="summary-row">
+                                <span class="label">Movie:</span>
+                                <span id="summaryMovie" class="value">—</span>
+                            </div>
+
+                            <div class="summary-row">
+                                <span class="label">Theater:</span>
+                                <span id="summaryTheater" class="value">—</span>
+                            </div>
+
+                            <div class="summary-row">
+                                <span class="label">Show Time:</span>
+                                <span id="summaryTime" class="value">—</span>
+                            </div>
+
+                            <div class="summary-row">
+                                <span class="label">Seats:</span>
+                                <span id="summarySeats" class="value">None</span>
+                            </div>
+
+                            <!-- Snacks list: will be rendered as lines -->
+                            <div class="summary-section">
+                                <div class="section-title">Snacks:</div>
+                                <ul id="summarySnacksList" class="summary-snacks">
+                                    <!-- JS will insert <li>Snack Name — $Price × qty = $total</li> -->
+                                    <li class="empty">None</li>
+                                </ul>
+                            </div>
+
+                            <div class="summary-row small">
+                                <span class="label">Seats Total:</span>
+                                <span id="seatsTotal" class="value">$0.00</span>
+                            </div>
+
+                            <div class="summary-row small">
+                                <span class="label">Snacks Total:</span>
+                                <span id="snacksTotalInSummary" class="value">$0.00</span>
+                            </div>
+
+                            <div class="summary-row small">
+                                <span class="label">Taxes:</span>
+                                <span id="taxAmount" class="value">$0.00</span>
+                            </div><!-- Add this INSIDE .booking-summary, before Seats Total row -->
+<div class="summary-row small coupon-row">
+  <span class="label">Apply Coupon:</span>
+
+  <!-- value column: fixed / consistent width so right-edge lines up with Taxes -->
+  <span class="value value--fixed">
+    <div class="coupon-controls">
+      <input id="couponCodeInput" class="coupon-input" placeholder="Enter coupon code" aria-label="Coupon code">
+      <div class="coupon-buttons">
+        <button id="applyCouponBtn" class="coupon-apply-btn">Apply</button>
+        <button id="removeCouponBtn" class="coupon-remove-btn" style="display:none;">Remove</button>
+      </div>
+    </div>
+    <div id="couponMessage" class="coupon-msg" aria-live="polite"></div>
+  </span>
+</div>
+
+
+
+                            <div class="summary-divider"></div>
+
+                            <div class="summary-row total">
+                                <span class="label">Grand Total:</span>
+                                <span id="summaryTotal" class="value">$0.00</span>
+                            </div>
+                        </div>
+
+
+                        <div class="payment-form">
+                            <h4>Payment Information</h4>
+
+                            <!-- Payment Method Selection -->
+                            <div class="payment-methods">
+                                <h5>Payment Method</h5>
+                                <div class="payment-options">
+                                    <div class="payment-option active" data-method="card">
+                                        <div class="payment-icon">💳</div>
+                                        <span>Credit/Debit Card</span>
+                                    </div>
+                                    <div class="payment-option" data-method="paypal">
+                                        <div class="payment-icon">🅿️</div>
+                                        <span>PayPal</span>
+                                    </div>
+                                    <div class="payment-option" data-method="applepay">
+                                        <div class="payment-icon">🍎</div>
+                                        <span>Apple Pay</span>
+                                    </div>
+                                    <div class="payment-option" data-method="googlepay">
+                                        <div class="payment-icon">🔵</div>
+                                        <span>Google Pay</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card Payment Form -->
+                            <form id="paymentForm" class="payment-form-content">
+                                <div class="payment-section card-payment active">
+                                    <div class="form-group">
+                                        <label for="cardName">Cardholder Name</label>
+                                        <input type="text" id="cardName" name="cardName">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cardNumber">Card Number</label>
+                                        <input type="text" id="cardNumber" name="cardNumber"
+                                            placeholder="1234 5678 9012 3456">
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="expiryDate">Expiry Date</label>
+                                            <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="cvv">CVV</label>
+                                            <input type="text" id="cvv" name="cvv" placeholder="123">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- PayPal Payment Section -->
+                                <div class="payment-section paypal-payment">
+                                    <div class="payment-info">
+                                        <div class="paypal-logo">
+                                            <div class="paypal-icon">🅿️</div>
+                                            <span>PayPal</span>
+                                        </div>
+                                        <p>You will be redirected to PayPal to complete your payment securely.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Apple Pay Payment Section -->
+                                <div class="payment-section applepay-payment">
+                                    <div class="payment-info">
+                                        <div class="applepay-logo">
+                                            <div class="applepay-icon">🍎</div>
+                                            <span>Apple Pay</span>
+                                        </div>
+                                        <p>Use Touch ID or Face ID to pay with Apple Pay.</p>
+                                        <div class="device-info">
+                                            <small>Available on supported devices</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Google Pay Payment Section -->
+                                <div class="payment-section googlepay-payment">
+                                    <div class="payment-info">
+                                        <div class="googlepay-logo">
+                                            <div class="googlepay-icon">🔵</div>
+                                            <span>Google Pay</span>
+                                        </div>
+                                        <p>Pay quickly and securely with Google Pay.</p>
+                                        <div class="device-info">
+                                            <small>Available on Android devices and supported browsers</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Common Contact Information -->
+                                <div class="contact-info">
+                                    <div class="form-group">
+                                        <label for="email">Email Address</label>
+                                        <input type="email" id="email" name="email" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone">Phone Number</label>
+                                        <input type="tel" id="phone" name="phone" required>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="step-buttons">
+                        <button class="prev-step-btn" id="backToSnacks">Back</button>
+                        <button class="confirm-booking-btn" id="confirmBooking">Confirm Booking</button>
+                         <button class="cancel-booking-btn" id="cancelBooking">Cancel</button> <!-- 👈 yeh add kiya -->
+                    </div>
+
+                </div>
+            </div>
+    </main>
+
+    <!-- Booking Success Modal -->
+    <!-- Booking Success Modal (REPLACE old one) -->
+<div id="successModal" class="modal-overlay hidden" aria-hidden="true">
+  <div class="ticket-modal">
+    <div class="ticket-modal-inner">
+      <h2 class="modal-title">Booking Confirmed!</h2>
+
+     <!-- replace the inner contents of <div id="ticketCard"> ... </div> with this -->
+<div id="ticketCard" class="ticket-card">
+   <div class="ticket-top">
+    <h3 class="ticket-title">🎟️ E-Ticket</h3>
+  </div>
+
+  <div class="ticket-grid">
+    <!-- Row 1: Booking ID (left) | Movie (right) -->
+    <div class="ticket-row">
+      <div class="ticket-cell left">
+        <div class="label">Booking ID:</div>
+        <div class="value" id="bookId">#000000</div>
+      </div>
+      <div class="ticket-cell right">
+        <div class="label">Movie:</div>
+        <div class="value" id="movieName">Movie Title</div>
+      </div>
+    </div>
+
+    <!-- Row 2: Date (left) | Time (right) -->
+    <div class="ticket-row">
+      <div class="ticket-cell left">
+        <div class="label">Date:</div>
+        <div class="value" id="movieDate">2025-08-18</div>
+      </div>
+      <div class="ticket-cell right">
+        <div class="label">Time:</div>
+        <div class="value" id="movieTime">1:30 PM</div>
+      </div>
+    </div>
+
+    <!-- Row 3: Theater (left) | Seats (right) -->
+    <div class="ticket-row">
+      <div class="ticket-cell left">
+        <div class="label">Theater:</div>
+        <div class="value" id="theaterName">CinemaMax Downtown</div>
+      </div>
+      <div class="ticket-cell right">
+        <div class="label">Seats:</div>
+        <div class="value" id="seatNumbers">E6</div>
+      </div>
+    </div>
+
+    <!-- Row 4: Snacks (left) | (right intentionally blank) -->
+    <div class="ticket-row">
+      <div class="ticket-cell left">
+        <div class="label">Snacks:</div>
+        <div class="value" id="snacksList">None</div>
+      </div>
+      <div class="ticket-cell right">
+        <!-- intentionally left empty -->
+        <div style="height:1px"></div>
+      </div>
+    </div>
+
+    <!-- Row 5: Total Amount (left) | Status (right) -->
+    <div class="ticket-row bottom-row">
+      <div class="ticket-cell left">
+        <div class="label">Total Amount:</div>
+        <div class="value" id="totalAmountTicket">$0</div>
+      </div>
+      <div class="ticket-cell right">
+        <div class="label">Status:</div>
+        <div class="value status-value" id="ticketStatus">CONFIRMED</div>
+      </div>
+    </div>
+  </div>
+
+
+
+      <div class="modal-actions">
+        <button id="downloadTicketBtn" class="btn btn-download">Download Ticket</button>
+        <button id="bookAnotherBtn" class="btn btn-secondary">Book Another Movie</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </div>
+
+    <!-- html2canvas + jsPDF for download -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<!-- your existing script -->
+ 
+<script src="booking.js"></script>
+
+</body>
+
+</html>

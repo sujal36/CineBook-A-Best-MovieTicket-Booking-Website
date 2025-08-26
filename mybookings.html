@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CineBook - My Bookings</title>
+  <link rel="stylesheet" href="styles.css"> <!-- same CSS as index -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<!-- Global Modal/Toast (same as index) -->
+<div id="ticketModal" class="modal" style="display:none">
+  <div class="modal-content">
+    <button id="modalClose" class="modal-close" aria-label="Close">×</button>
+    <div id="ticketModalBody"></div>
+  </div>
+</div>
+
+<body>
+  <!-- Header / Nav (keep same nav so UX consistent) -->
+<nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand"><span class="brand-icon">🎬</span><span class="brand-text">CineBook</span></div>
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="index.html#movies" class="nav-link">Movies</a></li>
+        <li><a href="index.html#theaters" class="nav-link">Theaters</a></li>
+        <li><a href="index.html#offers-section" class="nav-link">Offers</a></li>
+        <li><a href="index.html#reviews-section" class="nav-link">Reviews</a></li>
+        <li><a class="nav-link" href="mybookings.html">My Bookings</a></li>
+        <li><a href="about.html" class="nav-link active">About Us</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="hamburger"><span></span><span></span><span></span></div>
+    </div>
+  </nav>
+
+ <!-- My Bookings Heading Strip -->
+<section class="bookings-header">
+  <h1>My Bookings</h1>
+</section>
+
+<div class="bookings-info">
+  <p>All your confirmed tickets are listed below. Click <b>View Ticket</b> to open the generated ticket.</p>
+</div>
+
+
+
+  <!-- IMPORTANT: THIS DIV ID MUST MATCH script.js expectation -->
+  <main>
+    <section class="container" style="max-width:1000px; margin:0 auto; padding:18px;">
+      <div id="bookingsContainer" class="bookings-grid">
+
+        <!-- script.js -> loadBookings() will render booking cards here -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer (optional copy from index if you want) -->
+  <footer style="padding:20px; text-align:center; color:#666;">
+    <small>© 2025 CineBook. All rights reserved.</small>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <!-- Include the same JS used by index (must be same path) -->
+  <script src="script.js"></script>
+
+  <!-- booking.js is NOT required here unless you want extra booking-page functions on this page.
+       Keep it included only on booking.html where ticket modal logic runs. -->
+</body>
+</html>
+
+
+

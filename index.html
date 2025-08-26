@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineBook</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Stars aur "Your Review" ke beech ka gap badhao */
+        .review-form .star-input {
+            margin-bottom: 2.5rem !important;
+            /* 1rem bhi kar sakta hai */
+        }
+
+        /* Hint jab show nahi hoti to space na le */
+        .review-form .rating-hint {
+            display: none;
+            margin-top: 6px;
+        }
+
+        .review-form .rating-hint.show {
+            display: block;
+        }
+    </style>
+
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="brand-icon">🎬</span>
+                <span class="brand-text">CineBook</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#movies" class="nav-link">Movies</a></li>
+                <li><a href="#theaters" class="nav-link">Theaters</a></li>
+                <li><a href="#offers-section" class="nav-link">Offers</a></li>
+                <li><a href="#reviews-section" class="nav-link">Reviews</a></li>
+                <!-- Replace this line in your nav -->
+                <!-- <li><a href="#" id="myBookingsBtn" class="nav-link">My Bookings</a></li> -->
+
+                <!-- WITH THIS -->
+                <li><a href="mybookings.html" class="nav-link">My Bookings</a></li>
+                <li><a href="about.html" class="nav-link">About Us</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title" id="hero-title">Experience Cinema Like Never Before</h1>
+            <p class="hero-subtitle" id="hero-subtitle">
+                Book your favorite movies with premium comfort and state-of-the-art technology
+            </p>
+            <button class="cta-button" id="hero-button">
+                Explore Movies 🎬
+            </button>
+        </div>
+        <div class="hero-overlay"></div>
+
+        <!-- Dots Indicator -->
+        <div class="hero-dots">
+            <span class="dot active" onclick="showSlide(0)"></span>
+            <span class="dot" onclick="showSlide(1)"></span>
+            <span class="dot" onclick="showSlide(2)"></span>
+        </div>
+    </section>
+
+    <!-- Movies Section -->
+    <section id="movies" class="movies-section">
+        <div class="container">
+            <h2 class="section-title">Now Showing</h2>
+            <div class="movies-grid" id="moviesGrid">
+                <!-- Movies will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Theaters Section -->
+    <section id="theaters" class="theaters-section">
+        <div class="container">
+            <h2 class="section-title">Our Premium Theaters</h2>
+            <div class="theaters-grid">
+                <div class="theater-card"
+                    data-trailer="Index.Html_Page_Images\OurPremiumTheaters\Videos\CineBook IMAX Downtown.mp4">
+                    <div class="theater-image">
+                        <img src="Index.Html_Page_Images/OurPremiumTheaters/CineBook IMAX Downtown.jpg"
+                            alt="CineBook IMAX Downtown">
+                        <!-- JS play icon khud inject karega (kuch hatana nahi hai) -->
+                    </div>
+                    <div class="theater-content">
+                        <h3>
+                            <a href="https://www.imax.com/en/in" target="_blank" rel="noopener noreferrer">
+                                CineBook IMAX Downtown
+                            </a>
+                        </h3>
+                        <p>Experience movies in stunning IMAX technology with crystal-clear sound and immersive visuals.
+                        </p>
+                        <div class="theater-features">
+                            <span class="feature">IMAX</span>
+                            <span class="feature">Dolby Atmos</span>
+                            <span class="feature">Premium Seating</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="theater-card"
+                    data-trailer="Index.Html_Page_Images\OurPremiumTheaters\Videos\CineBook 4DX Mall.mp4">
+                    <div class="theater-image">
+                        <img src="Index.Html_Page_Images/OurPremiumTheaters/CineBook 4DX Mall.jpg"
+                            alt="CineBook 4DX Mall">
+                    </div>
+                    <div class="theater-content">
+                        <h3>
+                            <a href="https://www.imax.com/en/in" target="_blank" rel="noopener noreferrer">
+                                CineBook IMAX Downtown
+                            </a>
+                        </h3>
+                        <p>Feel every scene with our 4DX technology featuring motion seats and environmental effects.
+                        </p>
+                        <div class="theater-features">
+                            <span class="feature">4DX</span>
+                            <span class="feature">Motion Seats</span>
+                            <span class="feature">Environmental FX</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="theater-card"
+                    data-trailer="Index.Html_Page_Images\OurPremiumTheaters\Videos\CineBook Luxury Central.mp4">
+                    <div class="theater-image">
+                        <img src="Index.Html_Page_Images/OurPremiumTheaters/CineBook Luxury Central.jpg"
+                            alt="CineBook Luxury Central">
+                    </div>
+                    <div class="theater-content">
+                        <h3>
+                            <a href="https://www.imax.com/en/in" target="_blank" rel="noopener noreferrer">
+                                CineBook IMAX Downtown
+                            </a>
+                        </h3>
+                        <p>Indulge in luxury with reclining leather seats, gourmet dining personal service and premium
+                            features.</p>
+                        <div class="theater-features">
+                            <span class="feature">Luxury </span>
+                            <span class="feature">Fine Dining</span>
+                            <span class="feature">Concierge</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+    <section id="offers-section" class="special-offers-section">
+        <div class="container">
+            <h2 class="section-title">Special Offers</h2>
+            <div class="special-offers-grid">
+
+                <!-- Offer 1 -->
+                <div class="offer-ticket">
+                    <div class="ticket-left">
+                        <span>20% OFF</span>
+                    </div>
+                    <div class="ticket-center">
+                        <h3>Weekend Special</h3>
+                        <p>Get 20% off on all weekend bookings</p>
+                        <div class="offer-code">Code: WEEKEND20</div>
+                        <small>Valid Everyday </small>
+                    </div>
+                    <div class="ticket-right">
+                        <span>$3.20</span>
+                    </div>
+                </div>
+
+                <!-- Offer 2 -->
+                <div class="offer-ticket">
+                    <div class="ticket-left">
+                        <span>25% OFF</span>
+                    </div>
+                    <div class="ticket-center">
+                        <h3>Student Discount</h3>
+                        <p>Students get 25% off with valid ID</p>
+                        <div class="offer-code">Code: STUDENT25</div>
+                        <small>Valid throughout the year</small>
+                    </div>
+                    <div class="ticket-right">
+                        <span>$4.00</span>
+                    </div>
+                </div>
+
+                <!-- Offer 3 -->
+                <div class="offer-ticket">
+                    <div class="ticket-left">
+                        <span>Buy 4 Get 1</span>
+                    </div>
+                    <div class="ticket-center">
+                        <h3>Family Pack</h3>
+                        <p>Book 4 tickets and get 1 free</p>
+                        <div class="offer-code">Code: FAMILY4+1</div>
+                        <small>Valid on weekdays only</small>
+                    </div>
+                    <div class="ticket-right">
+                        <span>$15.99</span>
+                    </div>
+                </div>
+
+                <!-- Offer 4 -->
+                <div class="offer-ticket">
+                    <div class="ticket-left">
+                        <span>30% OFF</span>
+                    </div>
+                    <div class="ticket-center">
+                        <h3>Early Bird</h3>
+                        <p>30% off on morning shows before 12 PM</p>
+                        <div class="offer-code">Code: EARLY30</div>
+                        <small>Valid Monday to Friday</small>
+                    </div>
+                    <div class="ticket-right">
+                        <span>$4.80</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <section id="reviews-section" class="reviews-section">
+        <div class="container">
+            <h2 class="section-title">Customer Reviews</h2>
+            <div class="reviews-grid">
+                <!-- Review 1 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <span class="review-author">Riya Sharma</span>
+                        <span class="review-stars">⭐⭐⭐⭐⭐</span>
+                    </div>
+                    <p>"An amazing experience! The seats were super comfy and the sound was mind-blowing."</p>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <span class="review-author">Karan Verma</span>
+                        <span class="review-stars">⭐⭐⭐⭐</span>
+                    </div>
+                    <p>"Loved the Dolby Atmos audio. Felt like I was inside the movie itself!"</p>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <span class="review-author">Priya Mehta</span>
+                        <span class="review-stars">⭐⭐⭐⭐⭐</span>
+                    </div>
+                    <p>"Great service, clean theaters, and delicious snacks. Highly recommend CineBook!"</p>
+                </div>
+            </div>
+
+            <!-- Review Form -->
+            <!-- Review Form -->
+
+            <!-- Review Form -->
+            <form class="review-form" id="reviewForm" novalidate>
+                <h3>Leave a Review</h3>
+
+                <label for="reviewName">Your Name</label>
+                <input id="reviewName" type="text" placeholder="Enter your name">
+
+                <label>Rating</label>
+                <div class="star-input" id="reviewStars"></div>
+                <!-- hint yaha JS se inject hoga -->
+
+
+                <label for="reviewText">Your Review</label>
+                <textarea id="reviewText" placeholder="Write your review"></textarea>
+
+                <button type="submit">Submit Review</button>
+            </form>
+
+
+        </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+    <!-- Ticket Modal -->
+    <div id="ticketModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span id="modalClose" class="modal-close">&times;</span>
+            <div id="ticketModalBody"></div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="newsletter">
+            <h2>Stay Updated with Latest Movies</h2>
+            <p>Subscribe to our newsletter for exclusive offers and movie updates</p>
+
+            <!-- Form with IDs for JS -->
+            <form class="newsletter-form" id="newsletterForm">
+                <input type="email" id="newsletterEmail" placeholder="Enter your email" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+
+        <div class="footer-main">
+            <div class="footer-column brand">
+                <h3>🎬 <span>CineBook</span></h3>
+                <p>Your premier destination for movie ticket booking with premium comfort and convenience.</p>
+                <div class="social-icons"> <a href="https://x.com/SujalRas18" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://www.instagram.com/_sujal18_/" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/sujal-rastogi-0584a430a/" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://github.com/sujal36" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#movies">Movies</a></li>
+                    <li><a href="#theaters">Theaters</a></li>
+                    <li><a href="#offers-section">Offers</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="https://en.wikipedia.org/wiki/Wikipedia:Help_desk" target="_blank"
+                            rel="noopener noreferrer">Help Desk</a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/Terms_of_service" target="_blank"
+                            rel="noopener noreferrer">Terms of Service</a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/Privacy_policy" target="_blank"
+                            rel="noopener noreferrer">Privacy & Cookies Policy</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Contact Info</h4>
+                <ul>
+                    <li><i class="fas fa-phone"></i> ( +91) 9528879243</li>
+                    <li><i class="fas fa-envelope"></i> sujalrastogi.72@gmail.com</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 CineBook. All rights reserved. | Designed with ❤️ for movie lovers by Sujal Rastogi</p>
+        </div>
+    </footer>
+
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

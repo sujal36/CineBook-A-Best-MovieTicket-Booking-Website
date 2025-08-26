@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CineBook - Contact</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <!-- same navbar -->
+    <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand"><span class="brand-icon">🎬</span><span class="brand-text">CineBook</span></div>
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="index.html#movies" class="nav-link">Movies</a></li>
+        <li><a href="index.html#theaters" class="nav-link">Theaters</a></li>
+        <li><a href="index.html#offers-section" class="nav-link">Offers</a></li>
+        <li><a href="index.html#reviews-section" class="nav-link">Reviews</a></li>
+        <li><a class="nav-link" href="mybookings.html">My Bookings</a></li>
+        <li><a href="about.html" class="nav-link active">About Us</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="hamburger"><span></span><span></span><span></span></div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Paste the SAME content that was inside <section id="contact">...</section> in your index.html -->
+    <section id="contact" class="contact-section">
+      <div class="container">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-content">
+          <div class="contact-info">
+            <div class="contact-item">
+              <div class="contact-icon">📍</div>
+              <div class="contact-details">
+                <h4>Visit Us</h4>
+                <p>Site 4,Sahibabad Indl.<br>Area,Ghaziabad-201010</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">📞</div>
+              <div class="contact-details">
+                <h4>Call Us</h4>
+                <p>( +91) 9528879243-CINE<br>24/7 Customer Support</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">✉️</div>
+              <div class="contact-details">
+                <h4>Email Us</h4>
+                <p>sujalrastogi.72@gmail.com<br>SujalWorkonly@gmail.com</p>
+              </div>
+            </div>
+          </div>
+         
+
+
+          <div class="contact-form">
+            <form id="contactForm">
+              <div class="form-group"><input type="text" id="name" name="name" placeholder="Your Name" required></div>
+              <div class="form-group"><input type="email" id="email" name="email" placeholder="Your Email" required></div>
+              <div class="form-group"><textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea></div>
+              <button type="submit" class="submit-button">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+<footer style="padding:20px; text-align:center; color:#666;">
+    <small>© 2025 CineBook. All rights reserved.</small>
+  </footer>
+
+   <!-- ✅ Global modal (same IDs jinke upar script.js depend karta hai) -->
+  <div id="ticketModal" class="modal" style="display:none;">
+    <div class="modal-content" id="ticketModalBody"></div>
+    <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
